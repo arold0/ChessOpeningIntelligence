@@ -1,0 +1,10 @@
+data/raw/
+data/clean/
+*.zst
+*.pgn
+*.duckdb
+.env
+__pycache__/
+.ipynb_checkpoints/
+.vscode/
+.DS_Store

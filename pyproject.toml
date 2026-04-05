@@ -1,0 +1,17 @@
+[project]
+name = "chess-opening-intelligence"
+version = "0.1.0"
+description = "A Data Engineering + Analytics portfolio project identifying the best ROI chess openings."
+authors = [{ name = "Aroldo", email = "your.email@example.com" }]
+dependencies = [
+    "pandas",
+    "polars",
+    "duckdb",
+    "python-chess",
+    "zstandard",
+    "jupyter",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
