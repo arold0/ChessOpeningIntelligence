@@ -1,34 +1,25 @@
 # ♟️ Chess Opening Intelligence
 
+> 🇪🇸 [Leer en español](README_ES.md)
+
 > **Which chess opening actually gives you the best results for your rating?**
->
-> *¿Qué apertura de ajedrez realmente te da mejores resultados para tu nivel?*
 
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![DuckDB](https://img.shields.io/badge/DuckDB-analytical_engine-yellow.svg)](https://duckdb.org)
 
-**Data Engineering + Data Analytics Portfolio Project**
-
 ---
 
-## The Problem / El Problema
+## The Problem
 
-**English:** Every chess platform shows you opening win rates.
+Every chess platform shows you opening win rates.
 The issue is — those numbers lie. If a 1500-rated player beats a 1100-rated opponent with the London System, that "win" inflates the London's win rate at the 1500 bracket. Raw win rates don't account for *who* you're beating or *how hard* the resulting positions actually are.
 
 This project fixes that.
 
-**Español:** Todas las plataformas de ajedrez muestran tasas de victoria por apertura.
-El problema es que esos números mienten. Si un jugador de 1500 de Elo gana contra un oponente de 1100 con el Sistema Londres, esa "victoria" infla artificialmente la tasa de éxito del Londres en el rango de 1500. Las tasas brutas no tienen en cuenta *contra quién* ganas ni *qué tan difíciles* son las posiciones resultantes.
-
-Este proyecto corrige eso.
-
 ---
 
 ## The Metric: Opening Intelligence Index (OII)
-
-### What it does / Qué hace
 
 The **OII** is a composite metric that answers: *"For my Elo rating, which openings give me the best return on investment?"*
 
@@ -42,7 +33,7 @@ It adjusts for three biases that raw win rates ignore:
 
 **Formula:** `OII = ASR / Normalised(TC) × log₁₀(games_count)`
 
-### Example / Ejemplo
+### Example
 
 | Opening | Win Rate (1200–1400) | ASR | OII |
 |---------|---------------------|-----|-----|
@@ -51,15 +42,13 @@ It adjusts for three biases that raw win rates ignore:
 
 The London *looks* better by raw win rate. But once you remove the Elo advantage and factor in tactical complexity, the Italian Game delivers nearly **3× the ROI** at the 1200–1400 bracket.
 
-*El Londres parece mejor por tasa bruta. Pero al eliminar la ventaja de Elo y considerar la complejidad táctica, la Italiana entrega casi 3 veces más retorno en el rango 1200–1400.*
-
 > **Note:** Example values are illustrative. Real numbers will be published after the full analysis pipeline runs on 12 months of Lichess data.
 
 ---
 
-## The Blunder Zone / La Zona de Error
+## The Blunder Zone
 
-A unique feature: for every opening and Elo bracket, we calculate the **median move number where the first serious blunder happens** (centipawn loss > 200).
+For every opening and Elo bracket, we calculate the **median move number where the first serious blunder happens** (centipawn loss > 200).
 
 This tells you *when* you typically lose the thread — and whether some openings help you stay solid longer than others.
 
@@ -97,8 +86,8 @@ End-to-end pipeline processing **1 billion+ games** on a single machine.
 | **Python 3.11** | Pipeline orchestration | PGN streaming with `python-chess` and `zstandard` |
 | **Polars** | Data transformation | Lazy API handles 1B+ rows with < 4GB RAM |
 | **DuckDB** | Analytical SQL engine | Runs complex analytics locally without a server |
-| **SQL** | Business logic | All metrics computed in CTEs and views — maximum signal for DA roles |
-| **Streamlit** | Public dashboard | Free hosted portfolio link via Streamlit Cloud |
+| **SQL** | Business logic | All metrics computed in CTEs and views |
+| **Streamlit** | Public dashboard | Interactive hosted visualization |
 | **Power BI** | Deep-dive reports | Multi-page interactive analysis with slicers |
 
 ---
@@ -106,33 +95,31 @@ End-to-end pipeline processing **1 billion+ games** on a single machine.
 ## Key Findings
 
 > 🚧 *Results will be populated after the analysis pipeline completes on the full Lichess dataset. Stay tuned.*
->
-> 🚧 *Los resultados se publicarán cuando el pipeline de análisis se ejecute sobre el dataset completo de Lichess.*
 
 ---
 
-## Quick Start / Inicio Rápido
+## Quick Start
 
 ```bash
-# 1. Clone the repo / Clonar el repositorio
+# 1. Clone the repo
 git clone https://github.com/arold0/ChessOpeningIntelligence.git
 cd ChessOpeningIntelligence
 
-# 2. Install dependencies / Instalar dependencias
+# 2. Install dependencies
 pip install -e ".[dev]"
 
-# 3. Run the puzzle pipeline / Ejecutar pipeline de puzzles
+# 3. Run the puzzle pipeline
 python pipeline/02_ingest_puzzles.py
 
-# 4. Run the games pipeline / Ejecutar pipeline de partidas
+# 4. Run the games pipeline
 python pipeline/01_ingest_games.py
 ```
 
-For development commands, run `make help` to see all available targets.
+For all available development commands, run `make help`.
 
 ---
 
-## Data Sources / Fuentes de Datos
+## Data Sources
 
 | Source | Format | License |
 |--------|--------|---------|
@@ -141,7 +128,7 @@ For development commands, run `make help` to see all available targets.
 
 ---
 
-## Project Structure / Estructura del Proyecto
+## Project Structure
 
 ```
 chess-opening-intelligence/
@@ -159,7 +146,7 @@ chess-opening-intelligence/
 
 ---
 
-## Project Status / Estado del Proyecto
+## Project Status
 
 - [x] Project design and documentation
 - [x] Pipeline infrastructure (config, logging, validators)
@@ -174,4 +161,12 @@ chess-opening-intelligence/
 
 ---
 
-*Built by [Aroldo](https://github.com/arold0) as a Data Engineering + Data Analytics portfolio project.*
+## Contributing & Links
+
+- 📖 [Contributing Guide](CONTRIBUTING.md) — branch strategy, code style, how to run tests
+- 📄 [License (MIT)](LICENSE)
+- 🗂️ [SQL Documentation](sql/README.md) — schema, macros, views, execution order
+
+---
+
+*Built by [Aroldo](https://github.com/arold0).*
