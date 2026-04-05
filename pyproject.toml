@@ -1,17 +1,55 @@
 [project]
 name = "chess-opening-intelligence"
 version = "0.1.0"
-description = "A Data Engineering + Analytics portfolio project identifying the best ROI chess openings."
-authors = [{ name = "Aroldo", email = "your.email@example.com" }]
+requires-python = ">=3.11"
+description = "Data Engineering + Analytics pipeline identifying the best ROI chess openings using the Opening Intelligence Index (OII)."
+authors = [{ name = "Aroldo", email = "arold0@icloud.com" }]
+license = { text = "MIT" }
+
 dependencies = [
-    "pandas",
-    "polars",
-    "duckdb",
-    "python-chess",
-    "zstandard",
-    "jupyter",
+    "pandas>=2.1",
+    "polars>=1.0",
+    "duckdb>=1.0",
+    "python-chess>=1.10",
+    "zstandard>=0.22",
+    "python-dotenv>=1.0",
+    "pyarrow>=15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "pre-commit>=3.7",
+]
+notebook = [
+    "jupyter>=1.0",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+]
+dashboard = [
+    "streamlit>=1.35",
 ]
 
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: Pure function tests (no I/O)",
+    "integration: Pipeline step tests (uses temp files)",
+    "sql: SQL logic tests (uses temp DuckDB)",
+    "slow: Tests that process real data files",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+ignore = ["E501"]

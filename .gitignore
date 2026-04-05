@@ -1,12 +1,35 @@
+# ── Data ──────────────────────────────────────
+data/source/
 data/raw/
 data/clean/
 *.zst
 *.pgn
+
+# ── Database ──────────────────────────────────
 *.duckdb
+*.duckdb.wal
+
+# ── Environment ───────────────────────────────
 .env
+
+# ── Python ────────────────────────────────────
 __pycache__/
+*.egg-info/
+dist/
+.pytest_cache/
+htmlcov/
+
+# ── Notebooks ─────────────────────────────────
 .ipynb_checkpoints/
+
+# ── Tools ─────────────────────────────────────
 .vscode/
 .DS_Store
+.ruff_cache/
+
+# ── Logs ──────────────────────────────────────
+logs/
+
+# ── Private docs ──────────────────────────────
 DESIGN.md
 GEMINI.md
